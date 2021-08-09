@@ -4,6 +4,7 @@ import {
     AngularFirestore,
     AngularFirestoreDocument,
 } from "@angular/fire/firestore"; 
+import firebase from 'firebase/app';
 import { Router } from  "@angular/router";
 
 @Injectable({
@@ -20,6 +21,19 @@ export class AuthService {
         this.user = user;
       }
     });
+  }
+
+  FacebookAuth() {
+    return this.AuthLogin(new firebase.auth.FacebookAuthProvider());
+  }
+
+  AuthLogin(provider) {
+    return this.afAuth.signInWithPopup(provider)
+    .then((result) => {
+        console.log('You have been successfully logged in!')
+    }).catch((error) => {
+        console.log(error)
+    })
   }
 
   async login(email: string, password: string) {
