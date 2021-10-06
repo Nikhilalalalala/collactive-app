@@ -12,7 +12,6 @@ export class SortFilterPageComponent implements OnInit {
   isDatePostedSortSelected = false;
   isDateExpressedSortSelected = false;
   filterForm: FormGroup;
-
   dietaryRestrictions = [
     { name: "Halal", checked: false },
     { name: "Vegan", checked: false },
@@ -24,11 +23,10 @@ export class SortFilterPageComponent implements OnInit {
     { name: "Nut-free", checked: false },
     // { name: "Health supplements", checked: false }
   ]
-
   isOnHealthSupplements = false;
 
   constructor(
-    public activeModal: NgbActiveModal,
+    // public activeModal: NgbActiveModal,
     ) { }
 
   ngOnInit(): void {
@@ -83,10 +81,10 @@ export class SortFilterPageComponent implements OnInit {
   
 
   applyFilter() {
-    this.activeModal.close();
+    // this.activeModal.close();
   }
 
   close() {
-    this.activeModal.close();
+    // this.activeModal.close();
   }
 }

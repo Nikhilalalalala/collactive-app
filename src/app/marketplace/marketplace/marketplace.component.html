@@ -1,11 +1,20 @@
-<app-topbar [isShowBackButton]="false" [isShowMenu]="true"></app-topbar>
-<div class="marketplace-header">
-    <span style="font-size: 22px;">Marketplace</span>
-    <i class="fa fa-filter" (click)="this.openFilterPage()"></i>
-</div>
-<div class="container listings" *ngIf="this.currentUser !== undefined">
-    <div *ngFor="let listing of this.allLiveListings" id="{{listing.listingID}}" >
-        <app-listing [listing]="listing" [attr.id]="listing.ID" [currentUserID]="this.currentUser.uid" [listingID]="listing.listingID"></app-listing>
+<div *ngIf ="!this.showFilterPage">
+    <app-topbar [isShowBackButton]="false" [isShowMenu]="true"></app-topbar>
+    <div class="marketplace-header">
+        <span style="font-size: 22px;">Marketplace</span>
+        <i class="fa fa-filter" (click)="this.openFilterPage()"></i>
     </div>
+    <div class="container listings" *ngIf="this.currentUser !== undefined">
+        <div *ngFor="let listing of this.allLiveListings" id="{{listing.listingID}}" >
+            <app-listing [listing]="listing" [attr.id]="listing.ID" [currentUserID]="this.currentUser.uid" [listingID]="listing.listingID"></app-listing>
+        </div>
+    </div>
+    <app-bottom-nav [isDonor]="this.isDonor"></app-bottom-nav> 
 </div>
-<app-bottom-nav [isDonor]="this.isDonor"></app-bottom-nav> 
+<div *ngIf ="this.showFilterPage">
+    <div class="top-icons">
+        <i class="fa fa-arrow-left" (click)="this.closeFilterPage()" style="color:#3B485F; margin-top: 1px;" ></i>
+        <span class="done-btn" (click)="this.applyFilter()">Done</span>
+    </div>
+    <app-sort-filter-page></app-sort-filter-page>
+</div>

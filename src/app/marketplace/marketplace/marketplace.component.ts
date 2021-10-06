@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/service/auth/auth.service';
 import { ListingService } from 'src/app/service/listing/listing.service';
@@ -16,12 +16,14 @@ export class MarketplaceComponent implements OnInit {
   currentUser;
   currentUserData;
   isDonor;
+  @ViewChild(SortFilterPageComponent) sortFilterPage;
+  showFilterPage:boolean = false;
 
   constructor(
     public listingService: ListingService,
     private auth: AuthService,
     private userDataService: UserDataService,
-    private modalService: NgbModal
+    // private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +41,18 @@ export class MarketplaceComponent implements OnInit {
   }
 
   openFilterPage() {
-    this.modalService.open(SortFilterPageComponent);
+    this.showFilterPage = true;
+    // this.modalService.open(SortFilterPageComponent);
+  }
+  closeFilterPage() {
+    this.showFilterPage = false;
+  }
+
+  applyFilter() {
+    console.log(this.sortFilterPage.isDatePostedSortSelected)
+    console.log(this.sortFilterPage.isDateExpressedSortSelected)
+    console.log(this.sortFilterPage.dietaryRestrictions)
+    console.log(this.sortFilterPage.isOnHealthSupplements)
+    this.closeFilterPage()
   }
 }
